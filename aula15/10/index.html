@@ -1,0 +1,432 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitLife Academia</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        header {
+            background: #12372a;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        nav {
+            background: #1b4332;
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 12px;
+            font-weight: bold;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+
+        .painel {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px #0001;
+        }
+
+        h2 {
+            color: #1b4332;
+            margin-bottom: 18px;
+        }
+
+        .plano {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+
+        label {
+            display: block;
+            margin-top: 14px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        button, .botao {
+            display: inline-block;
+            width: 100%;
+            margin-top: 20px;
+            padding: 13px;
+            border: none;
+            border-radius: 6px;
+            background: #2d6a4f;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        button:hover, .botao:hover {
+            background: #1b4332;
+        }
+
+        .resultado {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #bbf7d0;
+            background: #f0fdf4;
+            border-radius: 8px;
+        }
+
+        .resultado p {
+            margin: 10px 0;
+            overflow-wrap: anywhere;
+        }
+
+        .total {
+            font-size: 22px;
+            font-weight: bold;
+            color: #166534;
+        }
+
+        .erro {
+            color: #b91c1c;
+            margin-top: 12px;
+        }
+
+        footer {
+            background: #12372a;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media print {
+            header, nav, footer, #formulario, .imprimir {
+                display: none !important;
+            }
+
+            body {
+                background: white;
+            }
+
+            main {
+                margin: 0;
+            }
+
+            .painel {
+                box-shadow: none;
+            }
+
+            .resultado {
+                display: block !important;
+            }
+        }
+
+        @media (max-width: 600px) {
+            nav a {
+                display: inline-block;
+                margin: 6px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>FitLife Academia</h1>
+    <p>Sistema de matrículas</p>
+</header>
+
+<nav>
+    <a href="#inicio">Início</a>
+    <a href="#planos">Planos</a>
+    <a href="#formulario">Nova matrícula</a>
+</nav>
+
+<main>
+
+    <section class="painel" id="inicio">
+        <h2>Painel administrativo</h2>
+        <p>Bem-vindo ao sistema de matrículas da FitLife Academia!</p>
+        <a href="#formulario" class="botao">Nova matrícula</a>
+    </section>
+
+    <section class="painel" id="planos">
+        <h2>Nossos planos</h2>
+
+        <div class="plano">
+            <h3>Básico</h3>
+            <p>Musculação</p>
+            <strong>R$ 89,90 / mês</strong>
+        </div>
+
+        <div class="plano">
+            <h3>Plus</h3>
+            <p>Musculação e aulas coletivas</p>
+            <strong>R$ 129,90 / mês</strong>
+        </div>
+
+        <div class="plano">
+            <h3>Premium</h3>
+            <p>Todas as modalidades</p>
+            <strong>R$ 179,90 / mês</strong>
+        </div>
+    </section>
+
+    <section class="painel" id="formulario">
+        <h2>Formulário de matrícula</h2>
+
+        <form id="matricula">
+            <label for="nome">Nome completo:</label>
+            <input type="text" id="nome" required
+                   maxlength="100"
+                   placeholder="Digite seu nome completo">
+
+            <label for="idade">Idade:</label>
+            <input type="number" id="idade" required
+                   min="18" max="120"
+                   placeholder="Sua idade">
+
+            <label for="telefone">Telefone:</label>
+            <input type="tel" id="telefone" required
+                   maxlength="20"
+                   placeholder="(41) 99999-9999">
+
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" required
+                   maxlength="150"
+                   placeholder="seuemail@exemplo.com">
+
+            <label for="data">Data da matrícula:</label>
+            <input type="date" id="data" required>
+
+            <label for="plano">Escolha seu plano:</label>
+            <select id="plano" required>
+                <option value="">Selecione um plano</option>
+                <option value="Basico">Básico - R$ 89,90</option>
+                <option value="Plus">Plus - R$ 129,90</option>
+                <option value="Premium">Premium - R$ 179,90</option>
+            </select>
+
+            <label for="pagamento">Forma de pagamento:</label>
+            <select id="pagamento" required>
+                <option value="">Selecione o pagamento</option>
+                <option value="PIX">PIX - 10% de desconto</option>
+                <option value="Cartão">Cartão</option>
+            </select>
+
+            <button type="submit">Realizar matrícula</button>
+
+            <p class="erro" id="erro" role="alert"></p>
+        </form>
+
+        <div class="resultado" id="comprovante">
+            <h2>Comprovante de matrícula</h2>
+
+            <p><strong>Nome:</strong> <span id="rNome"></span></p>
+            <p><strong>Idade:</strong> <span id="rIdade"></span></p>
+            <p><strong>Telefone:</strong> <span id="rTelefone"></span></p>
+            <p><strong>E-mail:</strong> <span id="rEmail"></span></p>
+            <p><strong>Data:</strong> <span id="rData"></span></p>
+            <p><strong>Plano:</strong> <span id="rPlano"></span></p>
+            <p><strong>Pagamento:</strong> <span id="rPagamento"></span></p>
+
+            <hr>
+
+            <p><strong>Valor original:</strong>
+                <span id="rOriginal"></span></p>
+
+            <p><strong>Desconto aplicado:</strong>
+                <span id="rPercentual"></span></p>
+
+            <p><strong>Valor do desconto:</strong>
+                <span id="rDesconto"></span></p>
+
+            <p class="total"><strong>Total:</strong>
+                <span id="rTotal"></span></p>
+
+            <p><em>Comprovante temporário. Os dados não são salvos.</em></p>
+
+            <button class="imprimir" onclick="window.print()">
+                Imprimir comprovante
+            </button>
+
+            <button class="imprimir" type="button"
+                    onclick="novaMatricula()">
+                Nova matrícula
+            </button>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <p>FitLife Academia &copy; 2026</p>
+</footer>
+
+<script>
+    const formulario = document.getElementById("matricula");
+    const erro = document.getElementById("erro");
+    const comprovante = document.getElementById("comprovante");
+    const campoData = document.getElementById("data");
+
+    const hoje = new Date();
+    const ano = hoje.getFullYear();
+    const mes = String(hoje.getMonth() + 1).padStart(2, "0");
+    const dia = String(hoje.getDate()).padStart(2, "0");
+
+    campoData.max = `${ano}-${mes}-${dia}`;
+    campoData.value = `${ano}-${mes}-${dia}`;
+
+    const planos = {
+        Basico: { nome: "Básico", preco: 8990 },
+        Plus: { nome: "Plus", preco: 12990 },
+        Premium: { nome: "Premium", preco: 17990 }
+    };
+
+    function moeda(centavos) {
+        return (centavos / 100).toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        });
+    }
+
+    function mostrar(id, valor) {
+        document.getElementById(id).textContent = valor;
+    }
+
+    formulario.addEventListener("submit", function(evento) {
+        evento.preventDefault();
+        erro.textContent = "";
+
+        const nome = document.getElementById("nome").value.trim();
+        const idadeTexto = document.getElementById("idade").value;
+        const telefone = document.getElementById("telefone").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const data = campoData.value;
+        const plano = document.getElementById("plano").value;
+        const pagamento = document.getElementById("pagamento").value;
+
+        const idade = Number(idadeTexto);
+        const digitosTelefone = telefone.replace(/\D/g, "");
+        const nomePartes = nome.split(/\s+/);
+
+        if (nome.length > 100 ||
+            !/^[\p{L}][\p{L}\s'-]*$/u.test(nome) ||
+            nomePartes.length < 2) {
+            erro.textContent = "Informe seu nome e sobrenome corretamente.";
+            return;
+        }
+
+        if (!Number.isInteger(idade) || idade < 18 || idade > 120) {
+            erro.textContent = "A idade deve ser entre 18 e 120 anos.";
+            return;
+        }
+
+        if (digitosTelefone.length < 10 ||
+            digitosTelefone.length > 13 ||
+            !/^[0-9()\s.+-]+$/.test(telefone)) {
+            erro.textContent = "Informe um telefone válido.";
+            return;
+        }
+
+        if (email.length > 150 ||
+            !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            erro.textContent = "Informe um e-mail válido.";
+            return;
+        }
+
+        if (!data || data > campoData.max) {
+            erro.textContent = "Informe uma data de matrícula válida.";
+            return;
+        }
+
+        if (!Object.prototype.hasOwnProperty.call(planos, plano)) {
+            erro.textContent = "Selecione um plano válido.";
+            return;
+        }
+
+        if (!["PIX", "Cartão"].includes(pagamento)) {
+            erro.textContent = "Selecione uma forma de pagamento.";
+            return;
+        }
+
+        const valorOriginal = planos[plano].preco;
+        let percentual = 0;
+
+        if (pagamento === "PIX") {
+            percentual = 10;
+        }
+
+        if (idade >= 60) {
+            percentual = Math.max(percentual, 15);
+        }
+
+        const desconto = Math.round(valorOriginal * percentual / 100);
+        const total = valorOriginal - desconto;
+
+        const [anoData, mesData, diaData] = data.split("-");
+
+        mostrar("rNome", nome);
+        mostrar("rIdade", idade + " anos");
+        mostrar("rTelefone", telefone);
+        mostrar("rEmail", email);
+        mostrar("rData", `${diaData}/${mesData}/${anoData}`);
+        mostrar("rPlano", planos[plano].nome);
+        mostrar("rPagamento", pagamento);
+        mostrar("rOriginal", moeda(valorOriginal));
+        mostrar("rPercentual", percentual + "%");
+        mostrar("rDesconto", moeda(desconto));
+        mostrar("rTotal", moeda(total));
+
+        comprovante.style.display = "block";
+        comprovante.scrollIntoView({ behavior: "smooth" });
+    });
+
+    function novaMatricula() {
+        formulario.reset();
+        campoData.value = campoData.max;
+        comprovante.style.display = "none";
+        erro.textContent = "";
+        document.getElementById("formulario").scrollIntoView({
+            behavior: "smooth"
+        });
+    }
+</script>
+
+</body>
+</html>
